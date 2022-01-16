@@ -1,5 +1,9 @@
 const imagem = document.querySelector('img');
+const imagem2 = document.querySelector('#img2');
+const imagem3 = document.querySelector('#img3');
 const botao = document.querySelector('button');
+const botao2 = document.querySelector('button');
+const botao3 = document.querySelector('button');
 const nomeDoPersonagem = document.querySelector('#nome');
 const nomeDoPersonagem2 = document.querySelector('#nome2');
 const nomeDoPersonagem3 = document.querySelector('#nome3');
@@ -13,6 +17,7 @@ const condicao3 = document.querySelector('#status3');
 gerarValorAletorio = () => {
     return Math.floor(Math.random() * 671);
 }
+
 
 pegarPersonagem = () => {
     let numeroAleatorio = gerarValorAletorio();
@@ -30,6 +35,48 @@ pegarPersonagem = () => {
         condicao.innerHTML = data.status;
 
     });
+ 
+
+}
+gerarValorAletorio2 = () => {
+    return Math.floor(Math.random() * 671);
 }
 
-botao.onclick = pegarPersonagem;
+pegarPersonagem2 = () => {
+    let numeroAleatorio2 = gerarValorAletorio2();
+    return fetch(`https://rickandmortyapi.com/api/character/${numeroAleatorio2}`, {
+        method:'GET',
+        headers:{
+            Accept: 'application.json',
+            "Content-type": 'application/json'
+        }
+    }).then((response) => response.json()).then((data) =>{
+        imagem2.src = data.image;
+        imagem2.alt = data.name;
+        nomeDoPersonagem2.innerHTML = data.name;
+        especie2.innerHTML = data.species;
+        condicao2.innerHTML = data.status;
+
+    });
+}
+gerarValorAletorio3 = () => {
+    return Math.floor(Math.random() * 671);
+}
+pegarPersonagem3 = () => {
+    let numeroAleatorio3 = gerarValorAletorio3();
+    return fetch(`https://rickandmortyapi.com/api/character/${numeroAleatorio3}`, {
+        method:'GET',
+        headers:{
+            Accept: 'application.json',
+            "Content-type": 'application/json'
+        }
+    }).then((response) => response.json()).then((data) =>{
+        imagem3.src = data.image;
+        imagem3.alt = data.name;
+        nomeDoPersonagem3.innerHTML = data.name;
+        especie3.innerHTML = data.species;
+        condicao3.innerHTML = data.status;
+
+    });
+}
+botao.onclick = pegarPersonagem('img'), pegarPersonagem2('#img2'), pegarPersonagem3('img3');
